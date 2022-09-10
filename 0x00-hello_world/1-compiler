@@ -1,2 +1,2 @@
 #!/bin/bash
-export CFIlE=main.c ; gcc -E $CFILE -o main.c ; ./1-compiler
+export CFIlE=main.c ; gcc -E $CFILE -o main.o ; ./1-compiler
