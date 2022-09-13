@@ -6,3 +6,4 @@
 5- printing numbers
 6- more on numbers
 7- printing alphabets decending order
+8- printing hexadecimals in lowercase
