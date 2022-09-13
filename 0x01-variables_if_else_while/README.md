@@ -7,3 +7,4 @@
 6- more on numbers
 7- printing alphabets decending order
 8- printing hexadecimals in lowercase
+9- prints all possible combinations of single-digit numbers.
