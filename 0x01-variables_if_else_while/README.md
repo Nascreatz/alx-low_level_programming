@@ -5,3 +5,4 @@
 4- same as 2 but applie the if condition to exempt q and e
 5- printing numbers
 6- more on numbers
+7- printing alphabets decending order
