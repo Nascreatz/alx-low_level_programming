@@ -2,6 +2,7 @@
 
 /**
  * jack_bauer - Day timing
+ * Return: always 0
  */
 void jack_bauer(void)
 {
@@ -15,6 +16,6 @@ void jack_bauer(void)
 		_putchar((s / 10) + '0');
 		_putchar((s % 10) + '0');
 		_putchar('\n');
-
+		return (0);
 	}
 }
