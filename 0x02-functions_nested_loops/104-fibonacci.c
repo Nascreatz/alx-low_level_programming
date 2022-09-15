@@ -5,14 +5,14 @@
  * main - main block
  * Return: 0 (Success)
  */
-nt main(void)
+iint main(void)
 {
 	unsigned long int fr1 = 0, bk1 = 1, fr2 = 0, bk2 = 2;
 	unsigned long int hold1, hold2, hold3;
 	int count;
 
 	printf("%lu, %lu, ", bk1, bk2);
-	for (count = 2; count < 98; count+)
+	for (count = 2; count < 98; count++)
 	{
 		if (bk1 + bk2 > LARGEST || fr2 > 0 || fr1 > 0)
 		{
@@ -30,7 +30,9 @@ nt main(void)
 			printf("%lu", bk2);
 		}
 		if (count != 97)
+		{
 			printf(", ");
+		}
 		printf("\n");
 		return (0);
 	}
