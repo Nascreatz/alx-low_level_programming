@@ -18,6 +18,7 @@ void print_times_table(int n)
 			while (b <= n)
 			{
 				int p = a * b;
+
 				_putchar(',');
 				_putchar(' ');
 				if (p < 10)
@@ -44,4 +45,4 @@ void print_times_table(int n)
 			a++;
 		}
 	}
-} 
+}
