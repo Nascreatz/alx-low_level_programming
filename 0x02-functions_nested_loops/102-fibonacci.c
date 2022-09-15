@@ -12,7 +12,7 @@ int main(void)
 	for (i = 0; i < 50; i++)
 	{
 		s = f1 + f2;
-		printf("lu%", s);
+		printf("%lu", s);
 
 		f1 = f2;
 		f2 = s;
