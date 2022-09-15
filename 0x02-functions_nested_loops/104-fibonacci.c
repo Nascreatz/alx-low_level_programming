@@ -31,7 +31,7 @@ int main(void)
 		}
 		if (count != 97)
 			printf(", ");
-		printf("\n");
-		return (0);
 	}
+	printf("\n");
+	return (0);
 }
