@@ -1,5 +1,3 @@
-#include <main.h>
-
 /**
  * leet - convert characters into 1337
  * @a: string to convert

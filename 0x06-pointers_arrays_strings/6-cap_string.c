@@ -1,8 +1,6 @@
-#include <main.h>
-
 /**
  * cap_string - capitalize all words in a string.
- * separators: space tab newline ,;.!?"(){}
+ * separators: space tab newline ,;.!?"(){}"
  * @a: character string to capitalize
  * Return: string
  */
