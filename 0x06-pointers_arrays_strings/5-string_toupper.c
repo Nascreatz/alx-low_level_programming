@@ -1,5 +1,3 @@
-#include <main.h>
-
 /**
  * string_toupper - converts characters in a string to uppercase
  * @a: string to convert
