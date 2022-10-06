@@ -1,128 +1,126 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
- * main - multiplies two positive numbers
- * @argc: argument count
- * @argv: argument vectors
- * Return: 0
+ * check_num - function to check the string for number
+ * @st: string being passed
+ * Return: 1 for number 0 for not
  */
-int main(int argc, char *argv[])
+int check_num(char *st)
 {
-	char *f = argv[1];
-	char *s = argv[2];
+	int a;
 
-	if (argc != 3 || !onlyNumbers(f) || !onlyNumbers(s))
+	for (a = 0; st[a] != '\0'; a++)
 	{
-		printf("Error\n");
-		exit(98);
-	}
-	if (*f == 48 || *s == 48)
-		printf("0\n");
-	else
-		multiply(s, f);
-	return (0);
-}
-
-/**
- * multiply - multiplies two numbers and displays it
- * @f: first "number"
- * @s: second "number"
- */
-void multiply(char *f, char *s)
-{
-	int i, len1, len2, total, fdigit, sdigit, res = 0, tmp;
-	int *ptr;
-
-	len1 = _strlen(f);
-	len2 = _strlen(s);
-	tmp = len2;
-	total = len1 + len2;
-	ptr = _calloc(sizeof(int), (len1 + len2));
-	for (len1--; len1 >= 0; len1--)
-	{
-		fdigit = f[len1] - '0';
-		res = 0;
-		len2 = tmp;
-		for (len2--; len2 >= 0; len2--)
-		{
-			sdigit = s[len2] - '0';
-			res += ptr[len2 + len1 + 1] + (fdigit * sdigit);
-			ptr[len1 + len2 + 1] = res % 10;
-			res /= 10;
-		}
-		if (res)
-			ptr[len1 + len2 + 1] = res % 10;
-	}
-	while (*ptr == 0)
-	{
-		ptr++;
-		total--;
-	}
-	for (i = 0; i < total; i++)
-		printf("%i", ptr[i]);
-	printf("\n");
-}
-/**
- * onlyNumbers - determines if string has only numbers
- * @c: input string
- * Return: 0 if false, 1 if true
- */
-int onlyNumbers(char *c)
-{
-	while (*c)
-	{
-		if (*c < '0' || *c > '9')
+		if (st[a] < '0' || st[a] > '9')
 			return (0);
-		c++;
 	}
 	return (1);
 }
-
 /**
- * _strlen - returns the length of a string
- * @s: string s
- * Return: length of string
+ * string_length - calculating string length
+ * @str: string to check
+ * Return: count
+ *
  */
-int _strlen(char *s)
+unsigned int string_length(char *str)
 {
-	char *p = s;
+	int a;
 
-	while (*s)
-		s++;
-	return (s - p);
+	for (a = 0; str[a] != '\0'; a++)
+		a++;
+	return (a);
 }
 
 /**
- * _memset - fills memory with a constant byte
- * @s: memory area
- * @b: constant byte
- * @n: bytes of the memory area
- * Return: pointer to the memory area s
+ * print_string - function to print string
+ * @st: string to print
+ * Return: none
  */
-char *_memset(char *s, char b, unsigned int n)
+void print_string(char *st)
 {
-	char *ptr = s;
-
-	while (n--)
-		*s++ = b;
-	return (ptr);
+	while (*st == '\0')
+		st++;
+	if (*st == '\0')
+		_putchar('0');
+	while (*st == '0')
+		st++;
+	while (*st != '\0')
+	{
+		_putchar(*st);
+		st++;
+	}
+	_putchar('\n');
 }
 
 /**
- * _calloc - allocates memory for an array, using malloc
- * @nmemb: number of elements of pointer
- * @size: size of each member
- * Return: pointer of allocated memory
+ * _calloc - function for memory
+ * @number: the number
+ * @size: the size
+ * Return: pointer to memory
  */
-void *_calloc(unsigned int nmemb, unsigned int size)
+void *_calloc(unsigned int number, unsigned int size)
 {
-	void *ptr;
+	char *p;
+	unsigned int a;
 
-	if (!nmemb || !size)
+	if (number == 0 || size == 0)
 		return (NULL);
-	ptr = malloc(size * nmemb);
-	if (!ptr)
+	p = malloc(number * size);
+	if (p == 0)
 		return (NULL);
-	_memset(ptr, 0, size * nmemb);
-	return (ptr);
+	for (a = 0; a < (number * size); a++)
+		p[a] = 0;
+	return (p);
+}
+
+/**
+ * main - function to multiply
+ * @argc: number of arguments passed
+ * @argv: argument variables
+ * Return: Always zero
+ */
+int main(int argc, char **argv)
+{
+	char *n1, *n2, *multi_res;
+	unsigned int l = 0, l1 = 0, l2 = 0, a, b, t = 0, c = 0, ten = 0;
+
+	if (argc < 3)
+	{
+		print_string("Error");
+		exit(98);
+	}
+	n1 = argv[1];
+	n2 = argv[2];
+	if (!(check_num(n1) && check_num(n2)))
+	{
+		print_string("Error");
+		exit(98);
+	}
+	l1 = string_length(n1);
+	l2 = string_length(n2);
+	l = l1 + l2;
+	multi_res = _calloc(l + 1, sizeof(char *));
+	if (multi_res == 0)
+	{
+		print_string("Error");
+		exit(98);
+	}
+	for (a = 0; a < l1; a++, ten++)
+	{
+		for (c = 0, b = 0; b < l2; b++)
+		{
+			t = (n1[l1 - a - 1] - '0') * (n2[l2 - b - 1] - '0') + c;
+			printf("%u\n", t);
+			if (multi_res[l - b - ten - 1] > 0)
+				t = t + multi_res[l - b - ten - 1] - '0';
+			multi_res[l - b - ten - 1] = t % 10 + '0';
+			c = t / 10;
+		}
+		multi_res[l - b - ten - 1] += c + '0';
+	}
+	print_string(multi_res);
+	free(multi_res);
+	return (0);
 }
