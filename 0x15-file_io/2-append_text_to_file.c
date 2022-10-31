@@ -1,40 +1,50 @@
 #include "main.h"
 
 /**
- * append_text_to_file - Entry Point
- * @filename: file name
- * @text_content: text content
- * Return: 1
+ * _strlen - compute the length of a NULL-terminated string
+ * @str: the string to measure
+ *
+ * Return: the length of str, or -1 if str is NULL
+ */
+ssize_t _strlen(const char *str)
+{
+	ssize_t len = 0;
+
+	if (!str)
+		return (-1);
+
+	while (*str++)
+		++len;
+
+	return (len);
+}
+
+/**
+ * append_text_to_file - append text to the end of a file
+ * @filename: the name of the file to append to
+ * @text_content: the data to append to filename
+ *
+ * Return: Upon success, return 1. Otherwise, return -1.
  */
 int append_text_to_file(const char *filename, char *text_content)
 {
-	int file, wr, i = 0;
+	ssize_t b_written = 0;
+	int fd;
 
-	if (filename == NULL)
+	if (!filename)
 		return (-1);
 
-	file = open(filename, O_RDWR | O_APPEND);
-	if (file == -1)
+	fd = open(filename, O_WRONLY | O_APPEND);
+
+	if (fd < 0)
 		return (-1);
 
+	if (text_content)
+		b_written = write(fd, text_content, _strlen(text_content));
 
+	close(fd);
 
-	while (text_content[i])
-		i++;
-
-	if (text_content == NULL)
-	{
-		close(file);
-		return (1);
-	}
-	else
-	{
-		wr = write(file, text_content, i);
-	}
-
-	if (wr == -1)
+	if (b_written < 0)
 		return (-1);
-
-	close(file);
 	return (1);
 }
